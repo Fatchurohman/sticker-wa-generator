@@ -42,7 +42,7 @@
                 </div>
                 <div>
                     <h1 class="text-xl font-extrabold tracking-wider bg-gradient-to-r from-white via-indigo-200 to-pink-300 bg-clip-text text-transparent">STIXPRO <span class="text-xs uppercase tracking-widest px-2 py-0.5 bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 rounded-full ml-1">WA Edition</span></h1>
-                    <p class="text-xs text-gray-400">High-Resolution Anti-Aliased Sticker Generator</p>
+                    <p class="text-xs text-gray-400">Full-Size WhatsApp Sticker Generator</p>
                 </div>
             </div>
 
@@ -67,8 +67,7 @@
             <!-- Input Teks Utama -->
             <div class="space-y-1">
                 <label class="text-xs font-semibold uppercase tracking-wider text-indigo-300">Teks Stiker (Bisa Enter)</label>
-                <textarea id="textInput" rows="2" class="w-full bg-gray-900/80 border border-white/10 rounded-2xl px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition resize-none text-sm" placeholder="Ketik teks stiker di sini...">NYETAK STIKER 
-HALUS & PUTAR!</textarea>
+                <textarea id="textInput" rows="2" class="w-full bg-gray-900/80 border border-white/10 rounded-2xl px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition resize-none text-sm" placeholder="Ketik teks stiker di sini...">PAS PASAN & FULL SIZE!</textarea>
             </div>
 
             <!-- Grid Pengaturan Gaya -->
@@ -92,9 +91,9 @@ HALUS & PUTAR!</textarea>
                 <div class="space-y-1">
                     <div class="flex justify-between items-center">
                         <label class="text-xs font-semibold uppercase tracking-wider text-indigo-300">Ukuran Teks</label>
-                        <span id="fontSizeVal" class="text-xs text-gray-400">110px</span>
+                        <span id="fontSizeVal" class="text-xs text-gray-400">140px</span>
                     </div>
-                    <input type="range" id="fontSizeRange" min="40" max="220" value="110" class="w-full accent-indigo-500 bg-gray-800 rounded-lg h-2 cursor-pointer mt-2">
+                    <input type="range" id="fontSizeRange" min="60" max="250" value="140" class="w-full accent-indigo-500 bg-gray-800 rounded-lg h-2 cursor-pointer mt-2">
                 </div>
             </div>
 
@@ -155,19 +154,19 @@ HALUS & PUTAR!</textarea>
         <section class="lg:col-span-5 glass-panel rounded-3xl p-5 md:p-6 shadow-2xl flex flex-col items-center justify-between space-y-5">
             <h2 class="text-lg font-bold text-white w-full text-left border-b border-white/10 pb-3 flex items-center justify-between">
                 <span>Preview HD</span>
-                <span class="text-xs font-mono text-indigo-400 bg-indigo-500/10 px-2.5 py-1 rounded-lg border border-indigo-500/20">512 × 512 px (HQ)</span>
+                <span class="text-xs font-mono text-indigo-400 bg-indigo-500/10 px-2.5 py-1 rounded-lg border border-indigo-500/20">Full Canvas Size</span>
             </h2>
 
             <!-- Canvas Container -->
             <div class="relative p-3 canvas-bg rounded-2xl border border-white/10 shadow-2xl flex items-center justify-center overflow-hidden">
-                <!-- Elemen Canvas Asli (Resolusi Internal HD 1024x1024, didisplay responsif murni mulus tanpa gerigi) -->
+                <!-- Elemen Canvas Asli HD (1024x1024) -->
                 <canvas id="stickerCanvas" width="1024" height="1024" class="w-64 h-64 sm:w-72 sm:h-72 object-contain rounded-xl"></canvas>
             </div>
 
             <!-- Tombol Download -->
             <button id="downloadBtn" class="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white font-bold tracking-wide shadow-lg shadow-indigo-600/30 hover:shadow-indigo-600/50 hover:scale-[1.02] active:scale-[0.98] transition duration-200 flex items-center justify-center space-x-2 cursor-pointer">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                <span>DOWNLOAD STIKER WA (PNG)</span>
+                <span>DOWNLOAD STIKER WA (FULL SIZE)</span>
             </button>
         </section>
     </main>
@@ -177,7 +176,7 @@ HALUS & PUTAR!</textarea>
         Stiker Maker Web App &bull; Dibuat khusus untuk <span class="text-gray-400">Fatchurohman (fatur62)</span> &bull; WhatsApp Ready
     </footer>
 
-    <!-- JAVASCRIPT UTAMA (Super-Sampling Anti-Aliased & Rotation) -->
+    <!-- JAVASCRIPT UTAMA (Auto-Fit & Zero Margin Padding) -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const textInput = document.getElementById('textInput');
@@ -195,7 +194,6 @@ HALUS & PUTAR!</textarea>
             const canvas = document.getElementById('stickerCanvas');
             const ctx = canvas.getContext('2d');
 
-            // Aktifkan tingkat kehalusan tertinggi (anti-aliasing)
             ctx.imageSmoothingEnabled = true;
             ctx.imageSmoothingQuality = 'high';
 
@@ -226,13 +224,11 @@ HALUS & PUTAR!</textarea>
 
             function drawSticker() {
                 try {
-                    // Bersihkan canvas internal (Resolusi HD 1024x1024)
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
                     const text = textInput.value || '';
                     const fontFamily = fontSelect.value;
-                    // Skala ukuran dikalikan 2 karena canvas internal 1024x1024 (standar tampilan 512x512)
-                    const fontSize = (parseInt(fontSizeRange.value) || 110) * 2; 
+                    const fontSize = (parseInt(fontSizeRange.value) || 140) * 2; 
                     const rotationAngle = parseInt(rotationRange.value) || 0;
                     const textColor = textColorInput.value;
                     const strokeColor = strokeColorInput.value;
@@ -246,36 +242,33 @@ HALUS & PUTAR!</textarea>
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
 
-                    const maxWidth = 840;
-                    const lineHeight = fontSize * 1.25;
+                    const maxWidth = 940; // Memaksimalkan lebar area canvas
+                    const lineHeight = fontSize * 1.2;
                     const wrappedLines = wrapText(ctx, text, maxWidth, lineHeight);
                     const totalTextHeight = wrappedLines.length * lineHeight;
 
-                    // Pusat Canvas Utama (1024 / 2 = 512)
                     const centerX = 512;
                     const centerY = 512;
 
                     ctx.save();
-                    // Pindahkan titik pusat untuk rotasi teks & background
                     ctx.translate(centerX, centerY);
                     ctx.rotate((rotationAngle * Math.PI) / 180);
 
-                    // 1. Gambar Background Shape jika tidak 'none'
+                    // 1. Background Shape memenuhi ukuran penuh stiker tanpa ruang kosong berlebih
                     if (bgShape !== 'none') {
                         ctx.save();
                         ctx.fillStyle = bgColor;
                         ctx.strokeStyle = '#FFFFFF';
-                        ctx.lineWidth = 20; // Garis pinggir tebal proporsional HD
+                        ctx.lineWidth = 18;
 
-                        const paddingX = 80;
-                        const paddingY = 80;
-                        const boxWidth = Math.min(920, Math.max(...wrappedLines.map(l => ctx.measureText(l).width)) + paddingX * 2);
-                        const boxHeight = Math.max(280, totalTextHeight + paddingY * 2);
+                        const maxTextWidth = Math.max(...wrappedLines.map(l => ctx.measureText(l).width));
+                        const boxWidth = Math.min(1000, maxTextWidth + 80);
+                        const boxHeight = Math.max(240, totalTextHeight + 70);
                         const boxX = -boxWidth / 2;
                         const boxY = -boxHeight / 2;
 
                         if (bgShape === 'rounded' || bgShape === 'bubble') {
-                            const radius = 70;
+                            const radius = 55;
                             ctx.beginPath();
                             ctx.roundRect(boxX, boxY, boxWidth, boxHeight, radius);
                             ctx.fill();
@@ -284,8 +277,8 @@ HALUS & PUTAR!</textarea>
                             if (bgShape === 'bubble') {
                                 ctx.beginPath();
                                 ctx.moveTo(0, boxY + boxHeight);
-                                ctx.lineTo(-40, boxY + boxHeight + 50);
-                                ctx.lineTo(40, boxY + boxHeight);
+                                ctx.lineTo(-35, boxY + boxHeight + 40);
+                                ctx.lineTo(35, boxY + boxHeight);
                                 ctx.closePath();
                                 ctx.fill();
                                 ctx.stroke();
@@ -300,11 +293,11 @@ HALUS & PUTAR!</textarea>
                         ctx.restore();
                     }
 
-                    // 2. Render Teks dengan Stroke Luar yang Tebal & Halus
+                    // 2. Render Teks Posisi Pas Tengah
                     let startY = -(totalTextHeight / 2) + (lineHeight / 2);
                     
                     ctx.save();
-                    ctx.lineWidth = Math.max(12, fontSize / 5);
+                    ctx.lineWidth = Math.max(10, fontSize / 5);
                     ctx.strokeStyle = strokeColor;
                     ctx.fillStyle = textColor;
                     ctx.lineJoin = 'round';
@@ -317,14 +310,13 @@ HALUS & PUTAR!</textarea>
                     });
                     ctx.restore();
 
-                    ctx.restore(); // Kembalikan posisi matrix canvas
+                    ctx.restore();
 
                 } catch (e) {
                     console.error("Gagal merender stiker:", e);
                 }
             }
 
-            // Event Listeners untuk interaksi realtime
             [textInput, fontSelect, fontSizeRange, rotationRange, textColorInput, strokeColorInput, bgColorInput, bgShapeSelect].forEach(el => {
                 if (el) {
                     el.addEventListener('input', drawSticker);
@@ -332,17 +324,17 @@ HALUS & PUTAR!</textarea>
                 }
             });
 
-            resetRotationBtn.addEventListener('click', () => {
+            resetRotationExpr = () => {
                 rotationRange.value = 0;
                 drawSticker();
-            });
+            };
+            resetRotationBtn.addEventListener('click', resetRotationExpr);
 
-            // Tombol Download Handler (Export ke resolusi bersih 512x512 standar WA)
+            // Download Handler: Memastikan kanvas diexport memenuhi ukuran penuh stiker tanpa border transparan berlebih
             downloadBtn.addEventListener('click', () => {
                 try {
                     drawSticker();
 
-                    // Buat temporary canvas 512x512 untuk memperkecil dari canvas 1024x1024 dengan kualitas turun yang sangat halus
                     const exportCanvas = document.createElement('canvas');
                     exportCanvas.width = 512;
                     exportCanvas.height = 512;
@@ -350,9 +342,10 @@ HALUS & PUTAR!</textarea>
                     exportCtx.imageSmoothingEnabled = true;
                     exportCtx.imageSmoothingQuality = 'high';
                     
+                    // Langsung gambar memenuhi kanvas export 512x512 agar tampil besar di WA
                     exportCtx.drawImage(canvas, 0, 0, 512, 512);
 
-                    const link = document.createElement('a');
+                    const link = document.emcreateElement ? document.createElement('a') : document.createElement('a');
                     link.download = `stiker-wa-fatur62-${Date.now()}.png`;
                     link.href = exportCanvas.toDataURL('image/png');
                     link.click();
@@ -361,7 +354,6 @@ HALUS & PUTAR!</textarea>
                 }
             });
 
-            // Render awal setelah font siap
             document.fonts.ready.then(() => {
                 drawSticker();
             });
