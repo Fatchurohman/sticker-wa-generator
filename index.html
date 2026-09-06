@@ -42,7 +42,7 @@
                 </div>
                 <div>
                     <h1 class="text-xl font-extrabold tracking-wider bg-gradient-to-r from-white via-indigo-200 to-pink-300 bg-clip-text text-transparent">STIXPRO <span class="text-xs uppercase tracking-widest px-2 py-0.5 bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 rounded-full ml-1">WA Edition</span></h1>
-                    <p class="text-xs text-gray-400">High-Resolution Sticker Generator</p>
+                    <p class="text-xs text-gray-400">High-Resolution Anti-Aliased Sticker Generator</p>
                 </div>
             </div>
 
@@ -58,25 +58,25 @@
     <main class="max-w-5xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 my-auto">
         
         <!-- PANEL KONTROL (KIRI) -->
-        <section class="lg:col-span-7 glass-panel rounded-3xl p-5 md:p-6 shadow-2xl flex flex-col space-y-5">
+        <section class="lg:col-span-7 glass-panel rounded-3xl p-5 md:p-6 shadow-2xl flex flex-col space-y-4">
             <h2 class="text-lg font-bold text-white flex items-center gap-2 border-b border-white/10 pb-3">
                 <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                 Editor Teks Stiker
             </h2>
 
             <!-- Input Teks Utama -->
-            <div class="space-y-1.5">
+            <div class="space-y-1">
                 <label class="text-xs font-semibold uppercase tracking-wider text-indigo-300">Teks Stiker (Bisa Enter)</label>
-                <textarea id="textInput" rows="3" class="w-full bg-gray-900/80 border border-white/10 rounded-2xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition resize-none text-base" placeholder="Ketik teks stiker di sini...">NYETAK STIKER 
-GAMPANG BANGET!</textarea>
+                <textarea id="textInput" rows="2" class="w-full bg-gray-900/80 border border-white/10 rounded-2xl px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition resize-none text-sm" placeholder="Ketik teks stiker di sini...">NYETAK STIKER 
+HALUS & PUTAR!</textarea>
             </div>
 
             <!-- Grid Pengaturan Gaya -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <!-- Pilihan Model Huruf / Font -->
-                <div class="space-y-1.5">
+                <div class="space-y-1">
                     <label class="text-xs font-semibold uppercase tracking-wider text-indigo-300">Model Tulisan (Font)</label>
-                    <select id="fontSelect" class="w-full bg-gray-900/80 border border-white/10 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                    <select id="fontSelect" class="w-full bg-gray-900/80 border border-white/10 rounded-xl px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 text-xs">
                         <option value="Titan One">Titan One (Bold & Fun)</option>
                         <option value="Chewy">Chewy (Cute & Round)</option>
                         <option value="Bungee">Bungee (Block Retro)</option>
@@ -89,44 +89,59 @@ GAMPANG BANGET!</textarea>
                 </div>
 
                 <!-- Ukuran Teks -->
-                <div class="space-y-1.5">
+                <div class="space-y-1">
                     <div class="flex justify-between items-center">
                         <label class="text-xs font-semibold uppercase tracking-wider text-indigo-300">Ukuran Teks</label>
-                        <span id="fontSizeVal" class="text-xs text-gray-400">55px</span>
+                        <span id="fontSizeVal" class="text-xs text-gray-400">110px</span>
                     </div>
-                    <input type="range" id="fontSizeRange" min="20" max="100" value="55" class="w-full accent-indigo-500 bg-gray-800 rounded-lg h-2 cursor-pointer">
+                    <input type="range" id="fontSizeRange" min="40" max="220" value="110" class="w-full accent-indigo-500 bg-gray-800 rounded-lg h-2 cursor-pointer mt-2">
+                </div>
+            </div>
+
+            <!-- Pengaturan Rotasi Teks -->
+            <div class="space-y-1 bg-black/20 p-3 rounded-xl border border-white/5">
+                <div class="flex justify-between items-center">
+                    <label class="text-xs font-semibold uppercase tracking-wider text-indigo-300 flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                        Rotasi / Putar Teks
+                    </label>
+                    <span id="rotationVal" class="text-xs text-indigo-300 font-mono">0°</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <input type="range" id="rotationRange" min="-180" max="180" value="0" class="w-full accent-pink-500 bg-gray-800 rounded-lg h-2 cursor-pointer">
+                    <button id="resetRotation" class="text-[10px] bg-white/10 hover:bg-white/20 px-2.5 py-1 rounded-lg text-gray-300 transition">Reset</button>
                 </div>
             </div>
 
             <!-- Palet Warna Teks & Outline -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1">
                 <div class="space-y-1">
                     <label class="text-[11px] font-medium text-gray-300">Warna Teks</label>
-                    <div class="flex items-center bg-gray-900/80 border border-white/10 rounded-xl p-1.5">
-                        <input type="color" id="textColor" value="#FFFFFF" class="w-8 h-8 rounded-lg bg-transparent cursor-pointer border-0">
-                        <span class="text-xs text-gray-400 ml-2 font-mono">Teks</span>
+                    <div class="flex items-center bg-gray-900/80 border border-white/10 rounded-xl p-1">
+                        <input type="color" id="textColor" value="#FFFFFF" class="w-7 h-7 rounded-lg bg-transparent cursor-pointer border-0">
+                        <span class="text-[11px] text-gray-400 ml-1.5 font-mono">Teks</span>
                     </div>
                 </div>
 
                 <div class="space-y-1">
-                    <label class="text-[11px] font-medium text-gray-300">Warna Garis Tepi</label>
-                    <div class="flex items-center bg-gray-900/80 border border-white/10 rounded-xl p-1.5">
-                        <input type="color" id="strokeColor" value="#000000" class="w-8 h-8 rounded-lg bg-transparent cursor-pointer border-0">
-                        <span class="text-xs text-gray-400 ml-2 font-mono">Garis</span>
+                    <label class="text-[11px] font-medium text-gray-300">Garis Tepi</label>
+                    <div class="flex items-center bg-gray-900/80 border border-white/10 rounded-xl p-1">
+                        <input type="color" id="strokeColor" value="#000000" class="w-7 h-7 rounded-lg bg-transparent cursor-pointer border-0">
+                        <span class="text-[11px] text-gray-400 ml-1.5 font-mono">Garis</span>
                     </div>
                 </div>
 
                 <div class="space-y-1">
-                    <label class="text-[11px] font-medium text-gray-300">Warna Background</label>
-                    <div class="flex items-center bg-gray-900/80 border border-white/10 rounded-xl p-1.5">
-                        <input type="color" id="bgColor" value="#7c3aed" class="w-8 h-8 rounded-lg bg-transparent cursor-pointer border-0">
-                        <span class="text-xs text-gray-400 ml-2 font-mono">Bg</span>
+                    <label class="text-[11px] font-medium text-gray-300">Background</label>
+                    <div class="flex items-center bg-gray-900/80 border border-white/10 rounded-xl p-1">
+                        <input type="color" id="bgColor" value="#7c3aed" class="w-7 h-7 rounded-lg bg-transparent cursor-pointer border-0">
+                        <span class="text-[11px] text-gray-400 ml-1.5 font-mono">Bg</span>
                     </div>
                 </div>
 
                 <div class="space-y-1">
-                    <label class="text-[11px] font-medium text-gray-300">Model Bentuk</label>
-                    <select id="bgShape" class="w-full bg-gray-900/80 border border-white/10 rounded-xl px-2 py-2 text-white text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <label class="text-[11px] font-medium text-gray-300">Bentuk</label>
+                    <select id="bgShape" class="w-full bg-gray-900/80 border border-white/10 rounded-xl px-1.5 py-1.5 text-white text-[11px] focus:outline-none focus:ring-2 focus:ring-indigo-500">
                         <option value="bubble">Balon Teks</option>
                         <option value="rounded">Kotak Melengkung</option>
                         <option value="circle">Lingkaran Penuh</option>
@@ -137,20 +152,20 @@ GAMPANG BANGET!</textarea>
         </section>
 
         <!-- PREVIEW & DOWNLOAD (KANAN) -->
-        <section class="lg:col-span-5 glass-panel rounded-3xl p-5 md:p-6 shadow-2xl flex flex-col items-center justify-between space-y-6">
+        <section class="lg:col-span-5 glass-panel rounded-3xl p-5 md:p-6 shadow-2xl flex flex-col items-center justify-between space-y-5">
             <h2 class="text-lg font-bold text-white w-full text-left border-b border-white/10 pb-3 flex items-center justify-between">
-                <span>Preview Ukuran Besar</span>
-                <span class="text-xs font-mono text-indigo-400 bg-indigo-500/10 px-2.5 py-1 rounded-lg border border-indigo-500/20">512 × 512 px</span>
+                <span>Preview HD</span>
+                <span class="text-xs font-mono text-indigo-400 bg-indigo-500/10 px-2.5 py-1 rounded-lg border border-indigo-500/20">512 × 512 px (HQ)</span>
             </h2>
 
             <!-- Canvas Container -->
             <div class="relative p-3 canvas-bg rounded-2xl border border-white/10 shadow-2xl flex items-center justify-center overflow-hidden">
-                <!-- Elemen Canvas Asli di-scale pakai CSS max-w agar responsif tapi resolusi aslinya tetap 512x512 -->
-                <canvas id="stickerCanvas" width="512" height="512" class="w-64 h-64 sm:w-72 sm:h-72 object-contain rounded-xl"></canvas>
+                <!-- Elemen Canvas Asli (Resolusi Internal HD 1024x1024, didisplay responsif murni mulus tanpa gerigi) -->
+                <canvas id="stickerCanvas" width="1024" height="1024" class="w-64 h-64 sm:w-72 sm:h-72 object-contain rounded-xl"></canvas>
             </div>
 
             <!-- Tombol Download -->
-            <button id="downloadBtn" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white font-bold tracking-wide shadow-lg shadow-indigo-600/30 hover:shadow-indigo-600/50 hover:scale-[1.02] active:scale-[0.98] transition duration-200 flex items-center justify-center space-x-2 cursor-pointer">
+            <button id="downloadBtn" class="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white font-bold tracking-wide shadow-lg shadow-indigo-600/30 hover:shadow-indigo-600/50 hover:scale-[1.02] active:scale-[0.98] transition duration-200 flex items-center justify-center space-x-2 cursor-pointer">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                 <span>DOWNLOAD STIKER WA (PNG)</span>
             </button>
@@ -159,16 +174,19 @@ GAMPANG BANGET!</textarea>
 
     <!-- FOOTER -->
     <footer class="w-full text-center py-4 text-xs text-gray-500 border-t border-white/5 mt-auto">
-        Stiker Maker Web App &bull; Dibuat khusus untuk <span class="text-gray-400">Fatchurohman</span> &bull; Ukuran Standar WhatsApp Ready
+        Stiker Maker Web App &bull; Dibuat khusus untuk <span class="text-gray-400">Fatchurohman (fatur62)</span> &bull; WhatsApp Ready
     </footer>
 
-    <!-- JAVASCRIPT UTAMA (Aman, Tanpa Placeholder, Utuh) -->
+    <!-- JAVASCRIPT UTAMA (Super-Sampling Anti-Aliased & Rotation) -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const textInput = document.getElementById('textInput');
             const fontSelect = document.getElementById('fontSelect');
             const fontSizeRange = document.getElementById('fontSizeRange');
             const fontSizeVal = document.getElementById('fontSizeVal');
+            const rotationRange = document.getElementById('rotationRange');
+            const rotationVal = document.getElementById('rotationVal');
+            const resetRotationBtn = document.getElementById('resetRotation');
             const textColorInput = document.getElementById('textColor');
             const strokeColorInput = document.getElementById('strokeColor');
             const bgColorInput = document.getElementById('bgColor');
@@ -177,7 +195,11 @@ GAMPANG BANGET!</textarea>
             const canvas = document.getElementById('stickerCanvas');
             const ctx = canvas.getContext('2d');
 
-            function wrapText(context, text, x, y, maxWidth, lineHeight) {
+            // Aktifkan tingkat kehalusan tertinggi (anti-aliasing)
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = 'high';
+
+            function wrapText(context, text, maxWidth, lineHeight) {
                 if (!text) return [];
                 const lines = text.split('\n');
                 let resultLines = [];
@@ -204,55 +226,66 @@ GAMPANG BANGET!</textarea>
 
             function drawSticker() {
                 try {
-                    // Bersihkan canvas transparan
+                    // Bersihkan canvas internal (Resolusi HD 1024x1024)
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
                     const text = textInput.value || '';
                     const fontFamily = fontSelect.value;
-                    const fontSize = parseInt(fontSizeRange.value) || 55;
+                    // Skala ukuran dikalikan 2 karena canvas internal 1024x1024 (standar tampilan 512x512)
+                    const fontSize = (parseInt(fontSizeRange.value) || 110) * 2; 
+                    const rotationAngle = parseInt(rotationRange.value) || 0;
                     const textColor = textColorInput.value;
                     const strokeColor = strokeColorInput.value;
                     const bgColor = bgColorInput.value;
                     const bgShape = bgShapeSelect.value;
 
-                    fontSizeVal.textContent = fontSize + 'px';
+                    fontSizeVal.textContent = Math.round(fontSize / 2) + 'px';
+                    rotationVal.textContent = rotationAngle + '°';
 
                     ctx.font = `${fontSize}px "${fontFamily}", sans-serif`;
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
 
-                    const maxWidth = 420;
+                    const maxWidth = 840;
                     const lineHeight = fontSize * 1.25;
-                    const wrappedLines = wrapText(ctx, text, 256, 256, maxWidth, lineHeight);
+                    const wrappedLines = wrapText(ctx, text, maxWidth, lineHeight);
                     const totalTextHeight = wrappedLines.length * lineHeight;
 
-                    // Gambar Background Shape jika tidak 'none'
+                    // Pusat Canvas Utama (1024 / 2 = 512)
+                    const centerX = 512;
+                    const centerY = 512;
+
+                    ctx.save();
+                    // Pindahkan titik pusat untuk rotasi teks & background
+                    ctx.translate(centerX, centerY);
+                    ctx.rotate((rotationAngle * Math.PI) / 180);
+
+                    // 1. Gambar Background Shape jika tidak 'none'
                     if (bgShape !== 'none') {
                         ctx.save();
                         ctx.fillStyle = bgColor;
                         ctx.strokeStyle = '#FFFFFF';
-                        ctx.lineWidth = 10;
+                        ctx.lineWidth = 20; // Garis pinggir tebal proporsional HD
 
-                        const paddingX = 40;
-                        const paddingY = 40;
-                        const boxWidth = Math.min(460, Math.max(...wrappedLines.map(l => ctx.measureText(l).width)) + paddingX * 2);
-                        const boxHeight = Math.max(140, totalTextHeight + paddingY * 2);
-                        const boxX = (512 - boxWidth) / 2;
-                        const boxY = (512 - boxHeight) / 2;
+                        const paddingX = 80;
+                        const paddingY = 80;
+                        const boxWidth = Math.min(920, Math.max(...wrappedLines.map(l => ctx.measureText(l).width)) + paddingX * 2);
+                        const boxHeight = Math.max(280, totalTextHeight + paddingY * 2);
+                        const boxX = -boxWidth / 2;
+                        const boxY = -boxHeight / 2;
 
                         if (bgShape === 'rounded' || bgShape === 'bubble') {
-                            const radius = 35;
+                            const radius = 70;
                             ctx.beginPath();
                             ctx.roundRect(boxX, boxY, boxWidth, boxHeight, radius);
                             ctx.fill();
                             ctx.stroke();
 
-                            // Tambah ekor balon obrolan jika model bubble
                             if (bgShape === 'bubble') {
                                 ctx.beginPath();
-                                ctx.moveTo(256, boxY + boxHeight);
-                                ctx.lineTo(236, boxY + boxHeight + 25);
-                                ctx.lineTo(276, boxY + boxHeight);
+                                ctx.moveTo(0, boxY + boxHeight);
+                                ctx.lineTo(-40, boxY + boxHeight + 50);
+                                ctx.lineTo(40, boxY + boxHeight);
                                 ctx.closePath();
                                 ctx.fill();
                                 ctx.stroke();
@@ -260,18 +293,18 @@ GAMPANG BANGET!</textarea>
                         } else if (bgShape === 'circle') {
                             ctx.beginPath();
                             const diameter = Math.max(boxWidth, boxHeight);
-                            ctx.arc(256, 256, diameter / 2, 0, Math.PI * 2);
+                            ctx.arc(0, 0, diameter / 2, 0, Math.PI * 2);
                             ctx.fill();
                             ctx.stroke();
                         }
                         ctx.restore();
                     }
 
-                    // Render Teks dengan Stroke Luar yang Tebal (Gaya Khas Stiker)
-                    let startY = 256 - (totalTextHeight / 2) + (lineHeight / 2);
+                    // 2. Render Teks dengan Stroke Luar yang Tebal & Halus
+                    let startY = -(totalTextHeight / 2) + (lineHeight / 2);
                     
                     ctx.save();
-                    ctx.lineWidth = Math.max(6, fontSize / 6);
+                    ctx.lineWidth = Math.max(12, fontSize / 5);
                     ctx.strokeStyle = strokeColor;
                     ctx.fillStyle = textColor;
                     ctx.lineJoin = 'round';
@@ -279,10 +312,12 @@ GAMPANG BANGET!</textarea>
 
                     wrappedLines.forEach((line, index) => {
                         let currentY = startY + (index * lineHeight);
-                        ctx.strokeText(line, 256, currentY);
-                        ctx.fillText(line, 256, currentY);
+                        ctx.strokeText(line, 0, currentY);
+                        ctx.fillText(line, 0, currentY);
                     });
                     ctx.restore();
+
+                    ctx.restore(); // Kembalikan posisi matrix canvas
 
                 } catch (e) {
                     console.error("Gagal merender stiker:", e);
@@ -290,27 +325,43 @@ GAMPANG BANGET!</textarea>
             }
 
             // Event Listeners untuk interaksi realtime
-            [textInput, fontSelect, fontSizeRange, textColorInput, strokeColorInput, bgColorInput, bgShapeSelect].forEach(el => {
+            [textInput, fontSelect, fontSizeRange, rotationRange, textColorInput, strokeColorInput, bgColorInput, bgShapeSelect].forEach(el => {
                 if (el) {
                     el.addEventListener('input', drawSticker);
                     el.addEventListener('change', drawSticker);
                 }
             });
 
-            // Tombol Download Handler
+            resetRotationBtn.addEventListener('click', () => {
+                rotationRange.value = 0;
+                drawSticker();
+            });
+
+            // Tombol Download Handler (Export ke resolusi bersih 512x512 standar WA)
             downloadBtn.addEventListener('click', () => {
                 try {
                     drawSticker();
+
+                    // Buat temporary canvas 512x512 untuk memperkecil dari canvas 1024x1024 dengan kualitas turun yang sangat halus
+                    const exportCanvas = document.createElement('canvas');
+                    exportCanvas.width = 512;
+                    exportCanvas.height = 512;
+                    const exportCtx = exportCanvas.getContext('2d');
+                    exportCtx.imageSmoothingEnabled = true;
+                    exportCtx.imageSmoothingQuality = 'high';
+                    
+                    exportCtx.drawImage(canvas, 0, 0, 512, 512);
+
                     const link = document.createElement('a');
                     link.download = `stiker-wa-fatur62-${Date.now()}.png`;
-                    link.href = canvas.toDataURL('image/png');
+                    link.href = exportCanvas.toDataURL('image/png');
                     link.click();
                 } catch (err) {
-                    alert('Gagal mendownload gambar stiker. Coba gunakan browser modern.');
+                    alert('Gagal mendownload gambar stiker.');
                 }
             });
 
-            // Render awal setelah font dimuat browser
+            // Render awal setelah font siap
             document.fonts.ready.then(() => {
                 drawSticker();
             });
