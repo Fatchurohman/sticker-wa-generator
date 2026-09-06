@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WA Sticker Studio Pro | by fatur62</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Chewy&family=Fredoka:wght@600&family=Montserrat:wght@900&family=Permanent+Marker&family=Press+Start+2P&family=Righteous&family=Rubik+Glitch&family=Titan+One&display=swap" rel="stylesheet">
+    <style>
+        @keyframes blink {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(0.85); }
+        }
+        .animate-blink {
+            animation: blink 1.2s infinite ease-in-out;
+        }
+        .glass-panel {
+            background: rgba(17, 24, 39, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .canvas-bg {
+            background-image: linear-gradient(45deg, #1f2937 25%, transparent 25%), 
+                              linear-gradient(-45deg, #1f2937 25%, transparent 25%), 
+                              linear-gradient(45deg, transparent 75%, #1f2937 75%), 
+                              linear-gradient(-45deg, transparent 75%, #1f2937 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            background-color: #111827;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-950 via-slate-900 to-indigo-950 text-gray-100 min-h-screen font-sans antialiased flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
+
+    <!-- HEADER MEWAH & IDENTITAS -->
+    <header class="w-full border-b border-white/10 glass-panel sticky top-0 z-50 px-4 py-3 shadow-2xl">
+        <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 to-pink-500 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <div>
+                    <h1 class="text-xl font-extrabold tracking-wider bg-gradient-to-r from-white via-indigo-200 to-pink-300 bg-clip-text text-transparent">STIXPRO <span class="text-xs uppercase tracking-widest px-2 py-0.5 bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 rounded-full ml-1">WA Edition</span></h1>
+                    <p class="text-xs text-gray-400">High-Resolution Sticker Generator</p>
+                </div>
+            </div>
+
+            <!-- Identitas Developer dengan Bulatan Kelap-kelip -->
+            <div class="flex items-center space-x-2.5 px-3.5 py-1.5 rounded-full bg-black/40 border border-white/10 shadow-inner">
+                <div class="w-3 h-3 rounded-full bg-emerald-400 shadow-lg shadow-emerald-400/80 animate-blink"></div>
+                <span class="text-xs font-semibold tracking-wider text-gray-300 uppercase">developer : <span class="text-emerald-400">fatur62</span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- KONTEN UTAMA -->
+    <main class="max-w-5xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 my-auto">
+        
+        <!-- PANEL KONTROL (KIRI) -->
+        <section class="lg:col-span-7 glass-panel rounded-3xl p-5 md:p-6 shadow-2xl flex flex-col space-y-5">
+            <h2 class="text-lg font-bold text-white flex items-center gap-2 border-b border-white/10 pb-3">
+                <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                Editor Teks Stiker
+            </h2>
+
+            <!-- Input Teks Utama -->
+            <div class="space-y-1.5">
+                <label class="text-xs font-semibold uppercase tracking-wider text-indigo-300">Teks Stiker (Bisa Enter)</label>
+                <textarea id="textInput" rows="3" class="w-full bg-gray-900/80 border border-white/10 rounded-2xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition resize-none text-base" placeholder="Ketik teks stiker di sini...">NYETAK STIKER 
+GAMPANG BANGET!</textarea>
+            </div>
+
+            <!-- Grid Pengaturan Gaya -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- Pilihan Model Huruf / Font -->
+                <div class="space-y-1.5">
+                    <label class="text-xs font-semibold uppercase tracking-wider text-indigo-300">Model Tulisan (Font)</label>
+                    <select id="fontSelect" class="w-full bg-gray-900/80 border border-white/10 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                        <option value="Titan One">Titan One (Bold & Fun)</option>
+                        <option value="Chewy">Chewy (Cute & Round)</option>
+                        <option value="Bungee">Bungee (Block Retro)</option>
+                        <option value="Permanent Marker">Permanent Marker (Handwritten)</option>
+                        <option value="Press Start 2P">Press Start 2P (Pixel Arcade)</option>
+                        <option value="Rubik Glitch">Rubik Glitch (Cyber Glitch)</option>
+                        <option value="Fredoka">Fredoka (Modern Clean)</option>
+                        <option value="Montserrat">Montserrat (Heavy Impact)</option>
+                    </select>
+                </div>
+
+                <!-- Ukuran Teks -->
+                <div class="space-y-1.5">
+                    <div class="flex justify-between items-center">
+                        <label class="text-xs font-semibold uppercase tracking-wider text-indigo-300">Ukuran Teks</label>
+                        <span id="fontSizeVal" class="text-xs text-gray-400">55px</span>
+                    </div>
+                    <input type="range" id="fontSizeRange" min="20" max="100" value="55" class="w-full accent-indigo-500 bg-gray-800 rounded-lg h-2 cursor-pointer">
+                </div>
+            </div>
+
+            <!-- Palet Warna Teks & Outline -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+                <div class="space-y-1">
+                    <label class="text-[11px] font-medium text-gray-300">Warna Teks</label>
+                    <div class="flex items-center bg-gray-900/80 border border-white/10 rounded-xl p-1.5">
+                        <input type="color" id="textColor" value="#FFFFFF" class="w-8 h-8 rounded-lg bg-transparent cursor-pointer border-0">
+                        <span class="text-xs text-gray-400 ml-2 font-mono">Teks</span>
+                    </div>
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-[11px] font-medium text-gray-300">Warna Garis Tepi</label>
+                    <div class="flex items-center bg-gray-900/80 border border-white/10 rounded-xl p-1.5">
+                        <input type="color" id="strokeColor" value="#000000" class="w-8 h-8 rounded-lg bg-transparent cursor-pointer border-0">
+                        <span class="text-xs text-gray-400 ml-2 font-mono">Garis</span>
+                    </div>
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-[11px] font-medium text-gray-300">Warna Background</label>
+                    <div class="flex items-center bg-gray-900/80 border border-white/10 rounded-xl p-1.5">
+                        <input type="color" id="bgColor" value="#7c3aed" class="w-8 h-8 rounded-lg bg-transparent cursor-pointer border-0">
+                        <span class="text-xs text-gray-400 ml-2 font-mono">Bg</span>
+                    </div>
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-[11px] font-medium text-gray-300">Model Bentuk</label>
+                    <select id="bgShape" class="w-full bg-gray-900/80 border border-white/10 rounded-xl px-2 py-2 text-white text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <option value="bubble">Balon Teks</option>
+                        <option value="rounded">Kotak Melengkung</option>
+                        <option value="circle">Lingkaran Penuh</option>
+                        <option value="none">Tanpa Background</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- PREVIEW & DOWNLOAD (KANAN) -->
+        <section class="lg:col-span-5 glass-panel rounded-3xl p-5 md:p-6 shadow-2xl flex flex-col items-center justify-between space-y-6">
+            <h2 class="text-lg font-bold text-white w-full text-left border-b border-white/10 pb-3 flex items-center justify-between">
+                <span>Preview Ukuran Besar</span>
+                <span class="text-xs font-mono text-indigo-400 bg-indigo-500/10 px-2.5 py-1 rounded-lg border border-indigo-500/20">512 × 512 px</span>
+            </h2>
+
+            <!-- Canvas Container -->
+            <div class="relative p-3 canvas-bg rounded-2xl border border-white/10 shadow-2xl flex items-center justify-center overflow-hidden">
+                <!-- Elemen Canvas Asli di-scale pakai CSS max-w agar responsif tapi resolusi aslinya tetap 512x512 -->
+                <canvas id="stickerCanvas" width="512" height="512" class="w-64 h-64 sm:w-72 sm:h-72 object-contain rounded-xl"></canvas>
+            </div>
+
+            <!-- Tombol Download -->
+            <button id="downloadBtn" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white font-bold tracking-wide shadow-lg shadow-indigo-600/30 hover:shadow-indigo-600/50 hover:scale-[1.02] active:scale-[0.98] transition duration-200 flex items-center justify-center space-x-2 cursor-pointer">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                <span>DOWNLOAD STIKER WA (PNG)</span>
+            </button>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full text-center py-4 text-xs text-gray-500 border-t border-white/5 mt-auto">
+        Stiker Maker Web App &bull; Dibuat khusus untuk <span class="text-gray-400">Fatchurohman</span> &bull; Ukuran Standar WhatsApp Ready
+    </footer>
+
+    <!-- JAVASCRIPT UTAMA (Aman, Tanpa Placeholder, Utuh) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const textInput = document.getElementById('textInput');
+            const fontSelect = document.getElementById('fontSelect');
+            const fontSizeRange = document.getElementById('fontSizeRange');
+            const fontSizeVal = document.getElementById('fontSizeVal');
+            const textColorInput = document.getElementById('textColor');
+            const strokeColorInput = document.getElementById('strokeColor');
+            const bgColorInput = document.getElementById('bgColor');
+            const bgShapeSelect = document.getElementById('bgShape');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const canvas = document.getElementById('stickerCanvas');
+            const ctx = canvas.getContext('2d');
+
+            function wrapText(context, text, x, y, maxWidth, lineHeight) {
+                if (!text) return [];
+                const lines = text.split('\n');
+                let resultLines = [];
+
+                for (let i = 0; i < lines.length; i++) {
+                    let words = lines[i].split(' ');
+                    let currentLine = '';
+
+                    for (let n = 0; n < words.length; n++) {
+                        let testLine = currentLine + words[n] + ' ';
+                        let metrics = context.measureText(testLine);
+                        let testWidth = metrics.width;
+                        if (testWidth > maxWidth && n > 0) {
+                            resultLines.push(currentLine);
+                            currentLine = words[n] + ' ';
+                        } else {
+                            currentLine = testLine;
+                        }
+                    }
+                    resultLines.push(currentLine);
+                }
+                return resultLines;
+            }
+
+            function drawSticker() {
+                try {
+                    // Bersihkan canvas transparan
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                    const text = textInput.value || '';
+                    const fontFamily = fontSelect.value;
+                    const fontSize = parseInt(fontSizeRange.value) || 55;
+                    const textColor = textColorInput.value;
+                    const strokeColor = strokeColorInput.value;
+                    const bgColor = bgColorInput.value;
+                    const bgShape = bgShapeSelect.value;
+
+                    fontSizeVal.textContent = fontSize + 'px';
+
+                    ctx.font = `${fontSize}px "${fontFamily}", sans-serif`;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    const maxWidth = 420;
+                    const lineHeight = fontSize * 1.25;
+                    const wrappedLines = wrapText(ctx, text, 256, 256, maxWidth, lineHeight);
+                    const totalTextHeight = wrappedLines.length * lineHeight;
+
+                    // Gambar Background Shape jika tidak 'none'
+                    if (bgShape !== 'none') {
+                        ctx.save();
+                        ctx.fillStyle = bgColor;
+                        ctx.strokeStyle = '#FFFFFF';
+                        ctx.lineWidth = 10;
+
+                        const paddingX = 40;
+                        const paddingY = 40;
+                        const boxWidth = Math.min(460, Math.max(...wrappedLines.map(l => ctx.measureText(l).width)) + paddingX * 2);
+                        const boxHeight = Math.max(140, totalTextHeight + paddingY * 2);
+                        const boxX = (512 - boxWidth) / 2;
+                        const boxY = (512 - boxHeight) / 2;
+
+                        if (bgShape === 'rounded' || bgShape === 'bubble') {
+                            const radius = 35;
+                            ctx.beginPath();
+                            ctx.roundRect(boxX, boxY, boxWidth, boxHeight, radius);
+                            ctx.fill();
+                            ctx.stroke();
+
+                            // Tambah ekor balon obrolan jika model bubble
+                            if (bgShape === 'bubble') {
+                                ctx.beginPath();
+                                ctx.moveTo(256, boxY + boxHeight);
+                                ctx.lineTo(236, boxY + boxHeight + 25);
+                                ctx.lineTo(276, boxY + boxHeight);
+                                ctx.closePath();
+                                ctx.fill();
+                                ctx.stroke();
+                            }
+                        } else if (bgShape === 'circle') {
+                            ctx.beginPath();
+                            const diameter = Math.max(boxWidth, boxHeight);
+                            ctx.arc(256, 256, diameter / 2, 0, Math.PI * 2);
+                            ctx.fill();
+                            ctx.stroke();
+                        }
+                        ctx.restore();
+                    }
+
+                    // Render Teks dengan Stroke Luar yang Tebal (Gaya Khas Stiker)
+                    let startY = 256 - (totalTextHeight / 2) + (lineHeight / 2);
+                    
+                    ctx.save();
+                    ctx.lineWidth = Math.max(6, fontSize / 6);
+                    ctx.strokeStyle = strokeColor;
+                    ctx.fillStyle = textColor;
+                    ctx.lineJoin = 'round';
+                    ctx.miterLimit = 2;
+
+                    wrappedLines.forEach((line, index) => {
+                        let currentY = startY + (index * lineHeight);
+                        ctx.strokeText(line, 256, currentY);
+                        ctx.fillText(line, 256, currentY);
+                    });
+                    ctx.restore();
+
+                } catch (e) {
+                    console.error("Gagal merender stiker:", e);
+                }
+            }
+
+            // Event Listeners untuk interaksi realtime
+            [textInput, fontSelect, fontSizeRange, textColorInput, strokeColorInput, bgColorInput, bgShapeSelect].forEach(el => {
+                if (el) {
+                    el.addEventListener('input', drawSticker);
+                    el.addEventListener('change', drawSticker);
+                }
+            });
+
+            // Tombol Download Handler
+            downloadBtn.addEventListener('click', () => {
+                try {
+                    drawSticker();
+                    const link = document.createElement('a');
+                    link.download = `stiker-wa-fatur62-${Date.now()}.png`;
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                } catch (err) {
+                    alert('Gagal mendownload gambar stiker. Coba gunakan browser modern.');
+                }
+            });
+
+            // Render awal setelah font dimuat browser
+            document.fonts.ready.then(() => {
+                drawSticker();
+            });
+            setTimeout(drawSticker, 100);
+        });
+    </script>
+</body>
+</html>
