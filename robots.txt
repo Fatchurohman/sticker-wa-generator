@@ -1,0 +1,6 @@
+# Mengizinkan semua crawler mesin pencari untuk mengindeks seluruh halaman
+User-agent: *
+Allow: /
+
+# Menunjukkan lokasi file sitemap ke bot Google / Bing
+Sitemap: https://stixpro.app/sitemap.xml
